@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banana Flyer", "Banana Flyer.csproj", "{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banana Flyer.Plugins", "Banana Flyer.Plugins.csproj", "{8B8080C2-7576-6071-CBAD-AF2F3D33B2BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banana Flyer", "Banana Flyer.csproj", "{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banana Flyer.Editor.Plugins", "Banana Flyer.Editor.Plugins.csproj", "{EE782F1F-7432-2F6F-7C76-361277369204}"
 EndProject
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B8080C2-7576-6071-CBAD-AF2F3D33B2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B8080C2-7576-6071-CBAD-AF2F3D33B2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B8080C2-7576-6071-CBAD-AF2F3D33B2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8080C2-7576-6071-CBAD-AF2F3D33B2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEEE6F80-0C8B-8BA7-22C1-22AE3F9AE64D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE782F1F-7432-2F6F-7C76-361277369204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE782F1F-7432-2F6F-7C76-361277369204}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE782F1F-7432-2F6F-7C76-361277369204}.Release|Any CPU.ActiveCfg = Release|Any CPU

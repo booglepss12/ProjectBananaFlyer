@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour {
@@ -16,6 +14,8 @@ public class Rocket : MonoBehaviour {
     //required component references
     Rigidbody rigidBody;
     AudioSource audioSource;
+    enum State { Alive, Dying, Transcending}
+    State state = State.Alive;
     float timerStart;
     bool sceneIsLoading = false;
 	// Use this for initialization
@@ -26,24 +26,15 @@ public class Rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (timerStart <= Mathf.Epsilon) // timer not set and process input
+        if (state == State.Alive) // timer not set and process input
         {
             Rotate();
             Thrust();
         }
-        else
-        {
-            LoadSceneAfterSeconds(2.0f);
-        }
-    }
-
-    private void LoadSceneAfterSeconds(float seconds)
-    {
-        if (!sceneIsLoading) { return; }
-        sceneIsLoading = true;
-        print("I'll load the scene later");
         
     }
+
+ 
 
     private void Rotate()
     {
@@ -80,47 +71,34 @@ public class Rocket : MonoBehaviour {
     }
      void OnCollisionEnter(Collision collision)
     {
-       switch(collision.gameObject.tag)
+        if (state !== State.Alive) { return;}
+        switch (collision.gameObject.tag)
         {
             case "Friendly":
                 break;
             case "Finish":
-                StartSuccessSequence();
+                state = State.Transcending;
+                Invoke("LoadNextScene", 2f); //TODO paramertize time
                 break;
             case "Deadly":
-                StartDeathSequence();
+                state = State.Dying;
+                LoadSameLevel();
+                Invoke("LoadSameLevel", 2f); 
                 break;
         }
 
     }
 
-    private void StartSuccessSequence()
+    private void LoadSameLevel()
     {
-        if (timerStart > Mathf.Epsilon) { return; } //don't bother if timer set
-        //make some noise
-        audioSource.PlayOneShot(success);
-        //stop engine noise
-        audioSource.Stop();
-        // show some fireworks
-        successVFX.SetActive(true);
-        timerStart = Time.time; //carry on later
-        //starting success sequence
+      
+        SceneManager.LoadScene(0);
     }
 
-    private void StartDeathSequence()
+    private void LoadNextScene()
     {
-        if (timerStart > Mathf.Epsilon) { return; } //don't bother if timer set
-        //make some noise
-        
-        //stop engine noise
-        audioSource.Stop();
-        // show some sparks
-        audioSource.PlayOneShot(explosion);
-        deathVFX.SetActive(true);
-
-        timerStart = Time.time; //carry on later
-        //starting death sequence
-        
-
+        SceneManager.LoadScene(1); //TODO allow for more than two levels
     }
+
+    
 }
