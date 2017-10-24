@@ -8,8 +8,9 @@ public class Rocket : MonoBehaviour {
     [SerializeField] AudioClip explosion;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip success;
-    [SerializeField] GameObject deathVFX;
-    [SerializeField] GameObject successVFX;
+    [SerializeField] ParticleSystem engineExhaust;
+    [SerializeField] ParticleSystem deathVFX;
+    [SerializeField] ParticleSystem successVFX;
 
     //required component references
     Rigidbody rigidBody;
@@ -25,18 +26,19 @@ public class Rocket : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (state == State.Alive) // timer not set and process input
         {
-            Rotate();
-            Thrust();
+            RepondToRotateInput();
+            RespondToThrustInput();
         }
         
     }
 
  
 
-    private void Rotate()
+    private void RepondToRotateInput()
     {
         rigidBody.freezeRotation = true; //take manual control of rotation
         float rotationThisFrame = rcsThrust * Time.deltaTime;
@@ -53,50 +55,76 @@ public class Rocket : MonoBehaviour {
         rigidBody.freezeRotation = false; //resume physics control of rotation
     }
 
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up * mainThrust);
-            if (!audioSource.isPlaying) // so no weird audio artifacts
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-            else
-            {
-                audioSource.Stop();
-            }
+            ApplyThrust();
 
         }
+        else
+        {
+            audioSource.Stop();
+            engineExhaust.Stop();
+        }
     }
-     void OnCollisionEnter(Collision collision)
+
+    private void ApplyThrust()
     {
-        if (state !== State.Alive) { return;}
+        rigidBody.AddRelativeForce(Vector3.up * mainThrust);
+        if (!audioSource.isPlaying) // so no weird audio artifacts
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        engineExhaust.Play();
+        
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (state != State.Alive) { return;}
         switch (collision.gameObject.tag)
         {
             case "Friendly":
                 break;
             case "Finish":
-                state = State.Transcending;
-                Invoke("LoadNextScene", 2f); //TODO paramertize time
+                StartSuccessSequence();
                 break;
             case "Deadly":
-                state = State.Dying;
-                LoadSameLevel();
-                Invoke("LoadSameLevel", 2f); 
+                StartDeathSequence();
                 break;
         }
 
     }
 
+    private void StartSuccessSequence()
+    {
+        state = State.Transcending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(success);
+        successVFX.Play();
+        sceneIsLoading = true;
+        Invoke("LoadNextScene", 1f);
+    }
+
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(explosion);
+        deathVFX.Play();
+        Invoke("LoadSameLevel", 1f);
+    }
+
     private void LoadSameLevel()
     {
-      
+        deathVFX.Stop();
         SceneManager.LoadScene(0);
     }
 
     private void LoadNextScene()
     {
+        successVFX.Stop();
         SceneManager.LoadScene(1); //TODO allow for more than two levels
     }
 
