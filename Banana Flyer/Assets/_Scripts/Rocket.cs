@@ -11,6 +11,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] ParticleSystem engineExhaust;
     [SerializeField] ParticleSystem deathVFX;
     [SerializeField] ParticleSystem successVFX;
+    [SerializeField] float levelLoadDelay = 2f;
 
     //required component references
     Rigidbody rigidBody;
@@ -104,7 +105,7 @@ public class Rocket : MonoBehaviour {
         audioSource.PlayOneShot(success);
         successVFX.Play();
         sceneIsLoading = true;
-        Invoke("LoadNextScene", 1f);
+        Invoke("LoadNextScene", levelLoadDelay);
     }
 
     private void StartDeathSequence()
@@ -113,7 +114,7 @@ public class Rocket : MonoBehaviour {
         audioSource.Stop();
         audioSource.PlayOneShot(explosion);
         deathVFX.Play();
-        Invoke("LoadSameLevel", 1f);
+        Invoke("LoadSameLevel", levelLoadDelay);
     }
 
     private void LoadSameLevel()

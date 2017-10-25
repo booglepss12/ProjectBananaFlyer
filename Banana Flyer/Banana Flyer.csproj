@@ -231,7 +231,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Rocket.cs" />
+    <Compile Include="Assets\_Scripts\Oscillator.cs" />
+    <Compile Include="Assets\_Scripts\Rocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
