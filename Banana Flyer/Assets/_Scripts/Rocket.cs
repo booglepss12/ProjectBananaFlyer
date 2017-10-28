@@ -1,5 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
 public class Rocket : MonoBehaviour {
    
@@ -12,6 +13,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] ParticleSystem deathVFX;
     [SerializeField] ParticleSystem successVFX;
     [SerializeField] float levelLoadDelay = 2f;
+    [SerializeField] bool debugKeysAreOn = false;
 
     //required component references
     Rigidbody rigidBody;
@@ -34,10 +36,20 @@ public class Rocket : MonoBehaviour {
             RepondToRotateInput();
             RespondToThrustInput();
         }
+        if (debugKeysAreOn)
+        {
+            RespondToDebugKeys();
+        }
         
     }
 
- 
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextScene();
+        }
+    }
 
     private void RepondToRotateInput()
     {
@@ -126,7 +138,10 @@ public class Rocket : MonoBehaviour {
     private void LoadNextScene()
     {
         successVFX.Stop();
-        SceneManager.LoadScene(1); //TODO allow for more than two levels
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int totalNumberOfScenes = SceneManager.sceneCountInBuildSettings;
+        int nextSceneIndex = (currentSceneIndex + 1) % totalNumberOfScenes;
+        SceneManager.LoadScene(nextSceneIndex); //TODO allow for more than two levels
     }
 
     

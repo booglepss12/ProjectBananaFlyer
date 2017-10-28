@@ -269,7 +269,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1633808064064906}
   m_LocalRotation: {x: -0, y: -0, z: -0.009731085, w: 0.9999527}
-  m_LocalPosition: {x: -24.3, y: 14.1, z: 0}
+  m_LocalPosition: {x: -24.3, y: 3.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4236681211931476}
@@ -710,6 +710,7 @@ MonoBehaviour:
   deathVFX: {fileID: 198656874999874520}
   successVFX: {fileID: 198635373445272352}
   levelLoadDelay: 2
+  debugKeysAreOn: 1
 --- !u!135 &135706366350802724
 SphereCollider:
   m_ObjectHideFlags: 1
