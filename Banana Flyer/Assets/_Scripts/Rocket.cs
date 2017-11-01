@@ -13,7 +13,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] ParticleSystem deathVFX;
     [SerializeField] ParticleSystem successVFX;
     [SerializeField] float levelLoadDelay = 2f;
-    [SerializeField] bool debugKeysAreOn = false;
+    
 
     //required component references
     Rigidbody rigidBody;
@@ -22,6 +22,7 @@ public class Rocket : MonoBehaviour {
     State state = State.Alive;
     float timerStart;
     bool sceneIsLoading = false;
+    bool collisionsAreEnabled = true;
 	// Use this for initialization
 	void Start () {
         rigidBody = GetComponent<Rigidbody>();
@@ -36,7 +37,7 @@ public class Rocket : MonoBehaviour {
             RepondToRotateInput();
             RespondToThrustInput();
         }
-        if (debugKeysAreOn)
+        if (Debug.isDebugBuild)
         {
             RespondToDebugKeys();
         }
@@ -49,11 +50,16 @@ public class Rocket : MonoBehaviour {
         {
             LoadNextScene();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            //toggle collisions
+            collisionsAreEnabled = !collisionsAreEnabled;
+        }
     }
 
     private void RepondToRotateInput()
     {
-        rigidBody.freezeRotation = true; //take manual control of rotation
+        rigidBody.angularVelocity = Vector3.zero; //remove rotation due to physics
         float rotationThisFrame = rcsThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -65,7 +71,7 @@ public class Rocket : MonoBehaviour {
             
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
-        rigidBody.freezeRotation = false; //resume physics control of rotation
+      
     }
 
     private void RespondToThrustInput()
@@ -77,9 +83,14 @@ public class Rocket : MonoBehaviour {
         }
         else
         {
-            audioSource.Stop();
-            engineExhaust.Stop();
+            StopApplyingThrust();
         }
+    }
+
+    private void StopApplyingThrust()
+    {
+        audioSource.Stop();
+        engineExhaust.Stop();
     }
 
     private void ApplyThrust()
@@ -95,7 +106,7 @@ public class Rocket : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive) { return;}
+        if (state != State.Alive || !collisionsAreEnabled) { return;}
         switch (collision.gameObject.tag)
         {
             case "Friendly":
