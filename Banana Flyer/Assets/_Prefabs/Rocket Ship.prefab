@@ -255,13 +255,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109016669177284}
-  m_LocalRotation: {x: 0.75105983, y: -0, z: -0, w: 0.6602343}
-  m_LocalPosition: {x: 0, y: -2.09, z: -0.27}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4836986668329468}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 97.36401, y: -0.000015258789, z: -0.000015258789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4836986668329468
 Transform:
   m_ObjectHideFlags: 1
@@ -269,7 +269,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1633808064064906}
   m_LocalRotation: {x: -0, y: -0, z: -0.009731085, w: 0.9999527}
-  m_LocalPosition: {x: -24.3, y: 3.6, z: 0}
+  m_LocalPosition: {x: -24.3, y: 6.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4236681211931476}
@@ -290,13 +290,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1622638679200790}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.150197, y: 3.1, z: -12.432644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4836986668329468}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4971917060941526
 Transform:
   m_ObjectHideFlags: 1
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rcsThrust: 50
-  mainThrust: 10
+  mainThrust: 25
   explosion: {fileID: 8300000, guid: 45d52ae2c52b57e45bdef16c4838eed1, type: 3}
   mainEngine: {fileID: 8300000, guid: 482bd104d795f794ba3e827dbc8ffb75, type: 3}
   success: {fileID: 8300000, guid: 552b1a12fb523fe42a725350c6ff93e1, type: 3}
@@ -710,7 +710,6 @@ MonoBehaviour:
   deathVFX: {fileID: 198656874999874520}
   successVFX: {fileID: 198635373445272352}
   levelLoadDelay: 2
-  debugKeysAreOn: 1
 --- !u!135 &135706366350802724
 SphereCollider:
   m_ObjectHideFlags: 1

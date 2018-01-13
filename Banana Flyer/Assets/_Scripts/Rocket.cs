@@ -143,7 +143,10 @@ public class Rocket : MonoBehaviour {
     private void LoadSameLevel()
     {
         deathVFX.Stop();
-        SceneManager.LoadScene(0);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int totalNumberOfScenes = SceneManager.sceneCountInBuildSettings;
+        int thisSceneIndex = (currentSceneIndex) % totalNumberOfScenes;
+        SceneManager.LoadScene(thisSceneIndex); 
     }
 
     private void LoadNextScene()
@@ -152,7 +155,7 @@ public class Rocket : MonoBehaviour {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int totalNumberOfScenes = SceneManager.sceneCountInBuildSettings;
         int nextSceneIndex = (currentSceneIndex + 1) % totalNumberOfScenes;
-        SceneManager.LoadScene(nextSceneIndex); //TODO allow for more than two levels
+        SceneManager.LoadScene(nextSceneIndex); 
     }
 
     
